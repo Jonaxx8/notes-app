@@ -21,7 +21,7 @@ const Nav = () => {
     return (
         <nav className="bg-indigo-500 p-4">
             <div className="container mx-auto flex justify-between items-center">
-                <Link to="/" className="text-white text-lg font-bold">
+                <Link to="#" className="text-white text-lg font-bold">
                     <img className='h-14' src={logo} alt="notes-app" />
                 </Link>
 
