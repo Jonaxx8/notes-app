@@ -1,46 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Note from './Note';
 import Modal from '../util/Modal';
 
-const NoteList = () => {
+const NoteList = ({ notes , onDeleteNote}) => {
     const [selectedNote, setselectedNote] = useState(null);
-    const [notes, setNotes] = useState([
-        {
-            id: 1,
-            title: 'Note 1',
-            description: 'This is note 1',
-            date: new Date(),
-            color: 'bg-blue-100'
-        },
-        {
-            id: 2,
-            title: 'Note 2',
-            description: 'This is note 2',
-            date: new Date(),
-            color: 'bg-green-100'
-        },
-        {
-            id: 3,
-            title: 'Note 3',
-            description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-            date: new Date(),
-            color: 'bg-yellow-100'  
-        },
-        {
-            id: 4,
-            title: 'Note 4',
-            description: 'This is note 4',
-            date: new Date(),
-            color: 'bg-pink-100'
-        },
-        {
-            id: 5,
-            title: 'Note 5',
-            description: 'This is note 5',
-            date: new Date(),
-            color: 'bg-purple-100'
-        },
-    ]);
+    const [filteredNotes, setFilteredNotes] = useState(notes);
 
     const handleNoteClick = (note) => {
         setselectedNote(note);
@@ -51,15 +15,18 @@ const NoteList = () => {
     };
 
     const handleDeleteNote = (id) => {
-        const newNotes = notes.filter((note) => note.id !== id);
-        setNotes(newNotes);
+        onDeleteNote(id);
         setselectedNote(null); // Close the modal after deleting
     };
 
+    useEffect(() => {
+        setFilteredNotes(notes);
+    }, [notes]);
+
     return (
         <div className='mt-5 p-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-5'>
-            {notes.length > 0 ? (
-                notes.map((note) => (
+            {filteredNotes.length > 0 ? (
+                filteredNotes.map((note) => (
                     <div
                         key={note.id}
                         onClick={() => handleNoteClick(note)}

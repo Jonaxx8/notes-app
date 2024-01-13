@@ -5,7 +5,9 @@ import { auth } from '../../../firebase';
 import { signOut } from "firebase/auth";
 
 
-const Nav = () => {
+const Nav = ({onSearch}) => {
+    const [searchInput, setSearchInput] = useState('');
+
     const navigate = useNavigate();
 
     const handleLogout = () => {
@@ -16,6 +18,12 @@ const Nav = () => {
         }).catch((error) => {
             console.log(error);
         });
+    }
+
+    const handleSearch = (e) => {
+        const inputValue = e.target.value;
+        setSearchInput(inputValue);
+        onSearch(inputValue);
     }
 
     return (
@@ -30,6 +38,8 @@ const Nav = () => {
                         <input
                             type="text"
                             placeholder="Search..."
+                            value={searchInput}
+                            onChange={handleSearch}
                             className="px-4 py-2 rounded-md border border-gray-300 focus:ring focus:ring-indigo-500 focus:border-indigo-500"
                         />
                     </div>
