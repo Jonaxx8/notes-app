@@ -9,7 +9,7 @@ const Note = (props) => {
             : description;
 
     return (
-        <div className={`bg-white shadow-lg rounded-md p-4 mb-4 ${color}`}>
+        <div className={`shadow-lg rounded-md p-4 mb-4 ${color}`}>
             <h3 className="text-xl font-semibold mb-2">{title}</h3>
             <p className="text-gray-600 mb-2">{limitedDescription}</p>
             <p className="text-sm text-gray-400">{date.toLocaleDateString()}</p>

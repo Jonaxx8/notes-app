@@ -1,27 +1,10 @@
-import React,{useState} from 'react'
-
+import React, { useState } from 'react';
 import Note from './Note';
 import Modal from '../util/Modal';
 
 const NoteList = () => {
     const [selectedNote, setselectedNote] = useState(null);
-
-    const handleNoteClick = (note) => {
-        setselectedNote(note);
-    }
-    const handleCloseModal = () => {
-        setselectedNote(null);
-    }
-
-    const colors = [
-        'bg-blue-100',
-        'bg-green-100',
-        'bg-yellow-100',
-        'bg-pink-100',
-        'bg-purple-100',
-    ];
-
-    const DUMMY_NOTES = [
+    const [notes, setNotes] = useState([
         {
             id: 1,
             title: 'Note 1',
@@ -57,12 +40,26 @@ const NoteList = () => {
             date: new Date(),
             color: 'bg-purple-100'
         },
-    ];
+    ]);
+
+    const handleNoteClick = (note) => {
+        setselectedNote(note);
+    };
+
+    const handleCloseModal = () => {
+        setselectedNote(null);
+    };
+
+    const handleDeleteNote = (id) => {
+        const newNotes = notes.filter((note) => note.id !== id);
+        setNotes(newNotes);
+        setselectedNote(null); // Close the modal after deleting
+    };
 
     return (
         <div className='mt-5 p-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-5'>
-            {DUMMY_NOTES.length > 0 ? (
-                DUMMY_NOTES.map((note) => (
+            {notes.length > 0 ? (
+                notes.map((note) => (
                     <div
                         key={note.id}
                         onClick={() => handleNoteClick(note)}
@@ -82,10 +79,10 @@ const NoteList = () => {
                 </p>
             )}
             {selectedNote && (
-                <Modal note={selectedNote} onClose={handleCloseModal} />
+                <Modal note={selectedNote} onClose={handleCloseModal} onDelete={handleDeleteNote} />
             )}
         </div>
     );
-}
+};
 
-export default NoteList
+export default NoteList;
