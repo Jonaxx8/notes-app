@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+
 import Nav from '../components/navbar/Nav';
 import NoteList from '../components/notes/NoteList';
+import FloatingButton from '../components/util/FloatingButton';
 
 const HomePage = () => {
     const [notes, setNotes] = useState([
@@ -41,6 +43,11 @@ const HomePage = () => {
         },
     ]);
 
+    const handleAddNote = (note) => {
+        const newNotes = [...notes, note];
+        setNotes(newNotes);
+    };
+
     const [filteredNotes, setFilteredNotes] = useState([]);
 
     const handleSearch = (searchValue) => {
@@ -59,6 +66,7 @@ const HomePage = () => {
         <>
             <Nav onSearch={handleSearch} />
             <NoteList notes={filteredNotes.length > 0 ? filteredNotes : notes}  onDeleteNote={onDeleteNote}/>
+            <FloatingButton onAddNote={handleAddNote} />
         </>
     );
 };
