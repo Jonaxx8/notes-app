@@ -2,6 +2,7 @@
 
 This project is a Short Notes Taking website developed in ReactJS, allowing users to manage and organize their notes efficiently.
 
+Here is the documentation for more clear explaination: [Documentation URL](https://docs.google.com/document/d/1prdGnp_csk6elVQUAywx-PcCvjJ_1jBlca8g0XaJDsQ/edit?usp=sharing).
 ## Features
 
 - **Homepage:**
